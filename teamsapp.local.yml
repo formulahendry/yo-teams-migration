@@ -14,23 +14,17 @@ provision:
     writeToEnvironmentFile: 
       teamsAppId: TEAMS_APP_ID
       
-  # Set TAB_DOMAIN and TAB_ENDPOINT for local launch
-  - uses: script 
-    with:
-      run:
-        echo "::set-teamsfx-env TAB_DOMAIN=localhost:53000";
-        echo "::set-teamsfx-env TAB_ENDPOINT=https://localhost:53000";
   # Validate using manifest schema
   - uses: teamsApp/validateManifest
     with:
       # Path to manifest template
-      manifestPath: ./appPackage/manifest.json
+      manifestPath: ./src/manifest/manifest.json
 
   # Build Teams app package with latest env value
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-      manifestPath: ./appPackage/manifest.json
+      manifestPath: ./src/manifest/manifest.json
       outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
       outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
   # Validate app package using validation rules
@@ -57,17 +51,6 @@ provision:
       appId: M365_APP_ID
       
 deploy:
-  # Install development tool(s)
-  - uses: devTool/install
-    with:
-      devCert:
-        trust: true
-    # Write the information of installed development tool(s) into environment
-    # file for the specified environment variable(s).
-    writeToEnvironmentFile:
-      sslCertFile: SSL_CRT_FILE
-      sslKeyFile: SSL_KEY_FILE
-
   # Run npm command
   - uses: cli/runNpmCommand
     with:
@@ -76,10 +59,6 @@ deploy:
   # Generate runtime environment variables
   - uses: file/createOrUpdateEnvironmentFile
     with:
-      target: ./.localConfigs
+      target: ./.env
       envs:
-        BROWSER: none
-        HTTPS: true
         PORT: 53000
-        SSL_CRT_FILE: ${{SSL_CRT_FILE}}
-        SSL_KEY_FILE: ${{SSL_KEY_FILE}}
