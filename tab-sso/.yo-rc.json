@@ -1,0 +1,9 @@
+{
+  "generator-teams": {
+    "promptValues": {
+      "developer": "Jun Han"
+    },
+    "libraryName": "tabSso",
+    "generator-version": "4.1.0"
+  }
+}
