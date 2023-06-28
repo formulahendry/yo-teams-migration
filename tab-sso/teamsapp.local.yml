@@ -54,13 +54,13 @@ provision:
   - uses: teamsApp/validateManifest
     with:
       # Path to manifest template
-      manifestPath: ./appPackage/manifest.json
+      manifestPath: ./src/manifest/manifest.json
 
   # Build Teams app package with latest env value
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-      manifestPath: ./appPackage/manifest.json
+      manifestPath: ./src/manifest/manifest.json
       outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
       outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
   # Validate app package using validation rules
@@ -95,12 +95,11 @@ deploy:
       workingDirectory: .
       args: install --no-audit
 
-  - uses: file/createOrUpdateJsonFile
+  # Generate runtime environment variables
+  - uses: file/createOrUpdateEnvironmentFile
     with:
-      target: ./config/default.json # Required. The relative path of settings file
-      appsettings: # Required. The appsettings to be generated
-        tab:
-          appId: ${{AAD_APP_CLIENT_ID}}
-          clientSecret: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-          applicationIdUri: api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}
-        port: "53000"
+      target: ./.env
+      envs:
+        PORT: 53000
+        TAB_APP_ID: ${{AAD_APP_CLIENT_ID}}
+        TAB_APP_URI: api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}

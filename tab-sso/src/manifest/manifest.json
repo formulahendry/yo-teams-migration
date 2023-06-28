@@ -1,14 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
   "manifestVersion": "1.15",
-  "id": "{{APPLICATION_ID}}",
-  "version": "{{VERSION}}",
-  "packageName": "{{PACKAGE_NAME}}",
+  "id": "${{TEAMS_APP_ID}}",
+  "version": "1.0.0",
+  "packageName": "com.contoso.teamsauthsso",
   "developer": {
     "name": "Jun Han",
-    "websiteUrl": "https://{{PUBLIC_HOSTNAME}}",
-    "privacyUrl": "https://{{PUBLIC_HOSTNAME}}/privacy.html",
-    "termsOfUseUrl": "https://{{PUBLIC_HOSTNAME}}/tou.html"
+    "websiteUrl": "https://${{TAB_DOMAIN}}",
+    "privacyUrl": "https://${{TAB_DOMAIN}}/privacy.html",
+    "termsOfUseUrl": "https://${{TAB_DOMAIN}}/tou.html"
   },
   "name": {
     "short": "tab sso",
@@ -28,7 +28,7 @@
     {
       "entityId": "5a1caad2-4ed7-4ee0-a6eb-eadde66bf5b2",
       "name": "tab sso Tab",
-      "contentUrl": "https://{{PUBLIC_HOSTNAME}}/tabSsoTab/?name={loginHint}&tenant={tid}&theme={theme}",
+      "contentUrl": "https://${{TAB_DOMAIN}}/tabSsoTab/?name={loginHint}&tenant={tid}&theme={theme}",
       "scopes": [
         "personal"
       ]
@@ -42,11 +42,11 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{PUBLIC_HOSTNAME}}"
+    "${{TAB_DOMAIN}}"
   ],
   "showLoadingIndicator": false,
   "webApplicationInfo": {
-    "id": "{{TAB_APP_ID}}",
-    "resource": "{{TAB_APP_URI}}"
+    "id": "${{AAD_APP_CLIENT_ID}}",
+    "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
   }
 }
