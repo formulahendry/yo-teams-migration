@@ -1,14 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
   "manifestVersion": "1.15",
-  "id": "{{APPLICATION_ID}}",
-  "version": "{{VERSION}}",
-  "packageName": "{{PACKAGE_NAME}}",
+  "id": "${{TEAMS_APP_ID}}",
+  "version": "1.0.0",
+  "packageName": "com.contoso.teams",
   "developer": {
     "name": "Jun Han",
-    "websiteUrl": "https://{{PUBLIC_HOSTNAME}}",
-    "privacyUrl": "https://{{PUBLIC_HOSTNAME}}/privacy.html",
-    "termsOfUseUrl": "https://{{PUBLIC_HOSTNAME}}/tou.html"
+    "websiteUrl": "https://${{BOT_DOMAIN}}",
+    "privacyUrl": "https://${{BOT_DOMAIN}}/privacy.html",
+    "termsOfUseUrl": "https://${{BOT_DOMAIN}}/tou.html"
   },
   "name": {
     "short": "bot",
@@ -27,7 +27,7 @@
   "staticTabs": [],
   "bots": [
     {
-      "botId": "{{MICROSOFT_APP_ID}}",
+      "botId": "${{AAD_APP_CLIENT_ID}}",
       "needsChannelSelector": true,
       "isNotificationOnly": false,
       "scopes": [
@@ -66,7 +66,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{PUBLIC_HOSTNAME}}"
+    "${{BOT_DOMAIN}}"
   ],
   "showLoadingIndicator": false
 }
