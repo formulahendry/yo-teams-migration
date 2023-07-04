@@ -1,0 +1,9 @@
+{
+  "generator-teams": {
+    "promptValues": {
+      "developer": "Jun Han"
+    },
+    "libraryName": "tabBot",
+    "generator-version": "4.1.0"
+  }
+}
