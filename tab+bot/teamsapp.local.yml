@@ -48,13 +48,13 @@ provision:
   - uses: teamsApp/validateManifest
     with:
       # Path to manifest template
-      manifestPath: ./appPackage/manifest.json
+      manifestPath: ./src/manifest/manifest.json
 
   # Build Teams app package with latest env value
   - uses: teamsApp/zipAppPackage
     with:
       # Path to manifest template
-      manifestPath: ./appPackage/manifest.json
+      manifestPath: ./src/manifest/manifest.json
       outputZipPath: ./appPackage/build/appPackage.${{TEAMSFX_ENV}}.zip
       outputJsonPath: ./appPackage/build/manifest.${{TEAMSFX_ENV}}.json
   # Validate app package using validation rules
@@ -82,7 +82,6 @@ deploy:
     with:
       target: ./.env
       envs:
-        MicrosoftAppId: ${{AAD_APP_CLIENT_ID}}
-        MicrosoftAppPassword: ${{SECRET_AAD_APP_CLIENT_SECRET}}
-        MicrosoftAppType: ${{MICROSOFT_APP_TYPE}}
-        MicrosoftAppTenantId: ${{MICROSOFT_APP_TENANT_ID}}
+        PORT: 3978
+        MICROSOFT_APP_ID: ${{AAD_APP_CLIENT_ID}}
+        MICROSOFT_APP_PASSWORD: ${{SECRET_AAD_APP_CLIENT_SECRET}}
